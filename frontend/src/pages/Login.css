@@ -1,0 +1,271 @@
+.login-page {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  background: #0b0b0c;
+  color: #f8fafc;
+  padding: 2rem;
+  font-family: 'Inter', 'Segoe UI', sans-serif;
+}
+
+.login-card {
+  width: min(100%, 460px);
+  background: #121214;
+  border: 1px solid #1f1f23;
+  border-radius: 0.8rem;
+  padding: 2rem;
+  box-shadow: 0 0 0 1px rgba(255,255,255,0.01) inset;
+}
+
+.login-icon {
+  width: 3rem;
+  height: 3rem;
+  display: grid;
+  place-items: center;
+  background: #0b0b0c;
+  border: 1px solid #2b2b31;
+  border-radius: 0.45rem;
+  margin-bottom: 1rem;
+  color: #f8fafc;
+  font-size: 1.1rem;
+}
+
+.login-title {
+  font-size: 1.45rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin: 0 0 0.35rem;
+}
+
+.login-subtitle {
+  color: #8b939f;
+  font-size: 0.9rem;
+  margin: 0 0 1.35rem;
+}
+
+.mode-switch {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.4rem;
+  margin-bottom: 1rem;
+}
+
+.mode-btn {
+  border: 1px solid #2c2c35;
+  background: #0b0b0c;
+  color: #8b939f;
+  border-radius: 0.45rem;
+  padding: 0.55rem 0.7rem;
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.mode-btn.active {
+  color: #f8fafc;
+  border-color: #f8fafc;
+}
+
+.mode-btn:hover {
+  color: #f8fafc;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.input-group > span {
+  color: #8b939f;
+  font-size: 0.8rem;
+  font-weight: 500;
+  padding: 0 0.95rem;
+}
+
+.input-group input,
+.password-wrapper {
+  border: 1px solid #2c2c35;
+  background: #0b0b0c;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+}
+
+.input-group input {
+  padding: 0.9rem 0.95rem;
+  border: 1px solid #2c2c35;
+  background: #0b0b0c;
+  border-radius: 0.5rem;
+  color: #f8fafc;
+  font-size: 0.95rem;
+}
+
+.password-wrapper {
+  position: relative;
+}
+
+.password-wrapper input {
+  flex: 1;
+  border: none;
+  outline: none;
+  background: transparent;
+  color: #f8fafc;
+  padding: 0.9rem 0.95rem;
+  font-size: 0.95rem;
+  padding-right: 2.8rem;
+}
+
+.toggle-password {
+  position: absolute;
+  right: 0.7rem;
+  border: none;
+  background: transparent;
+  color: #8b939f;
+  cursor: pointer;
+  padding: 0.4rem 0.6rem;
+  font-size: 0.9rem;
+  transition: color 0.2s;
+}
+
+.toggle-password:hover {
+  color: #f8fafc;
+}
+
+.autocomplete-group {
+  align-items: stretch;
+  gap: 0.4rem;
+}
+
+.autocomplete-group > label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.autocomplete-group > label > span {
+  color: #8b939f;
+  font-size: 0.8rem;
+  font-weight: 500;
+  padding: 0 0.95rem;
+}
+
+.autocomplete-wrapper {
+  position: relative;
+}
+
+.autocomplete-wrapper input {
+  width: 100%;
+  border: 1px solid #2c2c35;
+  background: #0b0b0c;
+  border-radius: 0.5rem;
+  color: #f8fafc;
+  padding: 0.9rem 0.95rem;
+  font-size: 0.95rem;
+  outline: none;
+}
+
+.autocomplete-list {
+  position: absolute;
+  top: calc(100% + 0.25rem);
+  left: 0;
+  right: 0;
+  z-index: 20;
+  background: #0b0b0c;
+  border: 1px solid #2c2c35;
+  border-radius: 0.45rem;
+  overflow: hidden;
+}
+
+.autocomplete-item {
+  width: 100%;
+  text-align: left;
+  border: none;
+  background: transparent;
+  color: #f8fafc;
+  padding: 0.75rem 0.9rem;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+.autocomplete-item:hover {
+  background: #121214;
+}
+
+.login-button {
+  margin-top: 0.1rem;
+  border: none;
+  background: #f8fafc;
+  color: #0b0b0c;
+  padding: 0.95rem 1rem;
+  border-radius: 0.5rem;
+  font-weight: 700;
+  font-size: 0.95rem;
+  cursor: pointer;
+}
+
+.login-button:hover {
+  background: #e2e8f0;
+}
+
+.login-error {
+  margin: 0;
+  color: #fda4af;
+  font-size: 0.85rem;
+}
+
+.forgot-password-row {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: -0.15rem;
+}
+
+.forgot-password-link {
+  border: none;
+  background: transparent;
+  color: #94a3b8;
+  font-size: 0.82rem;
+  cursor: pointer;
+  padding: 0;
+}
+
+.forgot-password-link:hover {
+  color: #f8fafc;
+}
+
+.forgot-password-help {
+  border: 1px solid #2c2c35;
+  background: #101013;
+  border-radius: 0.5rem;
+  padding: 0.75rem 0.9rem;
+  color: #cbd5e1;
+  font-size: 0.82rem;
+  line-height: 1.45;
+}
+
+.forgot-password-help p {
+  margin: 0;
+}
+
+.forgot-password-help p + p {
+  margin-top: 0.35rem;
+}
+
+.login-footer {
+  margin-top: 1rem;
+  font-size: 0.8rem;
+  color: #6b7280;
+}
+
+@media (max-width: 560px) {
+  .login-card {
+    padding: 1.4rem;
+  }
+}
