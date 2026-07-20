@@ -1,0 +1,42 @@
+databases:
+  - name: smart-attendance-db
+    databaseName: attendance_db
+    user: attendance_user
+    plan: free
+
+services:
+  - type: web
+    name: smart-attendance-backend
+    env: python
+    rootDir: backend
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: smart-attendance-db
+          property: connectionString
+      - key: JWT_SECRET
+        sync: false
+      - key: SUPER_MASTER_EMAIL
+        sync: false
+      - key: SUPER_MASTER_PASSWORD
+        sync: false
+      - key: SUPER_MASTER_NAME
+        value: Super Master
+      - key: SUPER_MASTER_PHONE
+        sync: false
+
+  - type: static
+    name: smart-attendance-frontend
+    rootDir: frontend
+    plan: free
+    buildCommand: npm install && npm run build
+    staticPublishPath: dist
+    envVars:
+      - key: VITE_API_BASE_URL
+        fromService:
+          name: smart-attendance-backend
+          type: web
+          property: host
