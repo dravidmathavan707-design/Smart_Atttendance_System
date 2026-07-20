@@ -28,12 +28,12 @@ services:
       - key: SUPER_MASTER_PHONE
         sync: false
 
-  - type: static
+  - type: static_site
     name: smart-attendance-frontend
     rootDir: frontend
     plan: free
     buildCommand: npm install && npm run build
-    staticPublishPath: dist
+    publishPath: dist
     envVars:
       - key: VITE_API_BASE_URL
         fromService:
