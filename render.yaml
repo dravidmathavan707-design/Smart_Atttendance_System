@@ -1,9 +1,3 @@
-databases:
-  - name: smart-attendance-db
-    databaseName: attendance_db
-    user: attendance_user
-    plan: free
-
 services:
   - type: web
     name: smart-attendance-backend
@@ -16,9 +10,7 @@ services:
       - key: PYTHON_VERSION
         value: 3.12.10
       - key: DATABASE_URL
-        fromDatabase:
-          name: smart-attendance-db
-          property: connectionString
+        sync: false
       - key: JWT_SECRET
         sync: false
       - key: SUPER_MASTER_EMAIL
