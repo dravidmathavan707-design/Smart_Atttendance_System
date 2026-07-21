@@ -7,8 +7,8 @@ from sqlalchemy.orm import sessionmaker, declarative_base
 load_dotenv()
 
 DATABASE_URL = os.getenv("DATABASE_URL")
-
-print("DATABASE_URL =", DATABASE_URL)  # Temporary debug
+if not DATABASE_URL:
+    raise RuntimeError("DATABASE_URL environment variable is required")
 
 engine = create_engine(DATABASE_URL)
 
