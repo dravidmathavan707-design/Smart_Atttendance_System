@@ -10,7 +10,9 @@ services:
       - key: PYTHON_VERSION
         value: 3.12.10
       - key: DATABASE_URL
-        sync: false
+        fromDatabase:
+          name: attendance-db
+          property: connectionString
       - key: JWT_SECRET
         sync: false
       - key: SUPER_MASTER_EMAIL
