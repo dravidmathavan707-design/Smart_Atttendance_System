@@ -76,6 +76,11 @@ export default function Login() {
       const exactMatch = institutions.find((item) => item.name.toLowerCase() === query);
       const resolvedInstitutionId = exactMatch ? exactMatch.id : institutionId;
 
+      if (!resolvedInstitutionId) {
+        setError('Please select a valid institution from the list.');
+        return;
+      }
+
       const data = loginMode === 'student'
         ? await loginStudentPassword(Number(resolvedInstitutionId), email, password)
         : await loginStaff(Number(resolvedInstitutionId), email, password);
