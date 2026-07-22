@@ -1,3 +1,6 @@
+delpoyed in render 
+the render link:https://smart-attendance-frontend-3u10.onrender.com
+
 # Smart Attendance System — Phase 1 (MVP) Skeleton
 
 This is a working skeleton for the Phase 1 MVP described in the design doc:
