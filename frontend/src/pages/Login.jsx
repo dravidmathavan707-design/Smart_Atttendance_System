@@ -21,6 +21,7 @@ export default function Login() {
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [showForgotPassword, setShowForgotPassword] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState('');
   const institutionWrapperRef = useRef(null);
   const navigate = useNavigate();
@@ -71,13 +72,17 @@ export default function Login() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (isSubmitting) return;
+
     try {
+      setIsSubmitting(true);
       const query = institutionQuery.trim().toLowerCase();
       const exactMatch = institutions.find((item) => item.name.toLowerCase() === query);
       const resolvedInstitutionId = exactMatch ? exactMatch.id : institutionId;
 
       if (!resolvedInstitutionId) {
         setError('Please select a valid institution from the list.');
+        setIsSubmitting(false);
         return;
       }
 
@@ -109,6 +114,8 @@ export default function Login() {
       } else {
         setError('Login failed. Check institution, email, and password.');
       }
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -238,7 +245,9 @@ export default function Login() {
           ) : null}
 
           {error && <p className="login-error">{error}</p>}
-          <button className="login-button" type="submit">ACCESS CONSOLE</button>
+          <button className="login-button" type="submit" disabled={isSubmitting}>
+            {isSubmitting ? 'SIGNING IN...' : 'ACCESS CONSOLE'}
+          </button>
         </form>
 
         <div className="login-footer">Authenticated entry • Monochrome control interface</div>

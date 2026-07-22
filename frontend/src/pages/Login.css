@@ -215,6 +215,11 @@
   background: #e2e8f0;
 }
 
+.login-button:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
 .login-error {
   margin: 0;
   color: #fda4af;
