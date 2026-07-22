@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { loginStaff, loginStudentPassword } from '../api/auth';
 import { useAuth } from '../context/AuthContext';
@@ -16,11 +16,13 @@ export default function Login() {
   const [loginMode, setLoginMode] = useState('faculty');
   const [institutionId, setInstitutionId] = useState('1');
   const [institutionQuery, setInstitutionQuery] = useState('Anna University');
+  const [showInstitutionList, setShowInstitutionList] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [showForgotPassword, setShowForgotPassword] = useState(false);
   const [error, setError] = useState('');
+  const institutionWrapperRef = useRef(null);
   const navigate = useNavigate();
   const { login } = useAuth();
 
@@ -49,9 +51,21 @@ export default function Login() {
     }
   }, [institutionQuery]);
 
+  useEffect(() => {
+    const handleOutsideClick = (event) => {
+      if (institutionWrapperRef.current && !institutionWrapperRef.current.contains(event.target)) {
+        setShowInstitutionList(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleOutsideClick);
+    return () => document.removeEventListener('mousedown', handleOutsideClick);
+  }, []);
+
   const handleInstitutionSelect = (item) => {
     setInstitutionId(item.id);
     setInstitutionQuery(item.name);
+    setShowInstitutionList(false);
     clearLoginError();
   };
 
@@ -130,19 +144,21 @@ export default function Login() {
         <form className="login-form" onSubmit={handleSubmit}>
           <label htmlFor="institution" className="input-group autocomplete-group">
             <span>Institution</span>
-            <div className="autocomplete-wrapper">
+            <div className="autocomplete-wrapper" ref={institutionWrapperRef}>
               <input
                 id="institution"
                 value={institutionQuery}
+                onFocus={() => setShowInstitutionList(true)}
                 onChange={(e) => {
                   setInstitutionQuery(e.target.value);
                   setInstitutionId('');
+                  setShowInstitutionList(true);
                   clearLoginError();
                 }}
                 placeholder="Type or select institution"
                 autoComplete="off"
               />
-              {!isExactInstitutionMatch && filteredInstitutions.length > 0 && (
+              {showInstitutionList && !isExactInstitutionMatch && filteredInstitutions.length > 0 && (
                 <div className="autocomplete-list">
                   {filteredInstitutions.map((item) => (
                     <button
