@@ -12,9 +12,6 @@ from pathlib import Path
 # Make the app package importable from migrations/
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
 
-from app.database import Base
-from app.models import models  # noqa: F401 — registers all model classes on Base.metadata
-
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
 config = context.config
@@ -22,11 +19,20 @@ config = context.config
 # Load environment variables from the project's .env file (one level up)
 load_dotenv(Path(__file__).resolve().parent.parent / ".env")
 
+
+def _normalize_database_url(url: str | None) -> str | None:
+    if url and url.startswith("postgres://"):
+        return url.replace("postgres://", "postgresql://", 1)
+    return url
+
 # Read DATABASE_URL from environment (.env), overriding whatever is in alembic.ini
-db_url = os.getenv("DATABASE_URL")
+db_url = _normalize_database_url(os.getenv("DATABASE_URL"))
 if not db_url:
-    raise RuntimeError("DATABASE_URL not found in .env or environment")
+    raise RuntimeError("DATABASE_URL not found in .env or environment; set it in Render Environment")
 config.set_main_option("sqlalchemy.url", db_url)
+
+from app.database import Base
+from app.models import models  # noqa: F401 — registers all model classes on Base.metadata
 
 # Interpret the config file for Python logging.
 # This line sets up loggers basically.
